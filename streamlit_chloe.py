@@ -36,7 +36,7 @@ calculated_host_listings_count = st.sidebar.slider("calculated host listings cou
 tab1, tab2 = st.tabs(['Explore', 'Predict'])
 
 with tab1:
-    
+    st.info('Feel free to adjust the parameters(left of the screen) and see how it changes the visualisations(right of the screen).', icon="ℹ️")
     st.title("Explore Airbnb Rental Prices with this Voting Regressor Model")
     filtered_data = data[data['neighbourhood_group'] == ng_dict[neighbourhood_group]]
     filtered_data = filtered_data[data['room_type'] == room_type_dict[room_type]]
@@ -54,6 +54,7 @@ with tab1:
     st.map(filtered_data[["latitude" ,"longitude"]])
 # Tab 2: Predict the Sepal Length using Linear Regression Model
 with tab2:
+    st.info('This is where the machine learning model tries to predict the prices of the airbnb rental apartments with the given parameters. Feel free to adjust the parameters and click the button "Predict Price".', icon="ℹ️")
     # Load the serialized trained model rf.pkl and scaler object scaler.pkl
     with open('regression.pkl', 'rb') as file:
         rf = pickle.load(file)
