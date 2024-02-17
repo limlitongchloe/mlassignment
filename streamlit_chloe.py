@@ -4,38 +4,38 @@ import pickle
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-st.set_page_config(page_title='Voting Regressor Model', page_icon=':money_with_wings:')
+st.set_page_config(page_title='Bagging Regressor Model', page_icon=':money_with_wings:')
 @st.cache_data
 def load_data():
     # First load the original airbnb listtings dataset
     data = pd.read_csv("listings_data.csv")
     return data
 data = load_data()
-st.sidebar.title("Exploring Airbnb Rental Price Estimation with Regression Model")
-
-st.sidebar.markdown("This web app allows you to explore voting regressor model for the prediction of airbnb rental prices. You can filter the parameter neighbourhood group, room type, minimum nights,reviews per month and calculated host listings count. You can view the distribution of price (target) on a visualization in the 'Explore' tab and make predictions in the 'Predict' tab.")
-room_type_dict = {
-            'Entire home/apt': 3,
-            'Private room': 2,
-            'Shared room': 1
-            }
-ng_dict = {
-            'Central Region': 1,
-            'West Region': 2,
-            'East Region': 3,
-            'North-East Region':4,
-            'North Region':5,
-            }
-neighbourhood_group = st.sidebar.selectbox("neighbourhood group", ['Central Region', 'West Region'   , 'East Region','North-East Region','North Region'], key='neighbourhood_group')
-room_type = st.sidebar.selectbox("Room type", ['Entire home/apt','Private room' , 'Shared room'], key='room_type')
-minimum_nights = st.sidebar.slider("minimum nights", 1.000000 ,365.000000  , (365.000000 ))
-reviews_per_month = st.sidebar.slider("reviews per month", 0.00 , 3.060000   , ( 3.060000  ))
-calculated_host_listings_count = st.sidebar.slider("calculated host listings count", 1.000000, 274.000000   , (274.000000 ))
 
 
 tab1, tab2 = st.tabs(['Explore', 'Predict'])
 
 with tab1:
+    st.sidebar.title("Exploring Airbnb Rental Price Estimation with Regression Model")
+
+    st.sidebar.markdown("This web app allows you to explore bagging regressor model for the prediction of airbnb rental prices. You can filter the parameter neighbourhood group, room type, minimum nights,reviews per month and calculated host listings count. You can view the distribution of price (target) on a visualization in the 'Explore' tab and make predictions in the 'Predict' tab.")
+    room_type_dict = {
+                'Entire home/apt': 3,
+                'Private room': 2,
+                'Shared room': 1
+                }
+    ng_dict = {
+                'Central Region': 1,
+                'West Region': 2,
+                'East Region': 3,
+                'North-East Region':4,
+                'North Region':5,
+                }
+    neighbourhood_group = st.sidebar.selectbox("neighbourhood group", ['Central Region', 'West Region'   , 'East Region','North-East Region','North Region'], key='neighbourhood_group')
+    room_type = st.sidebar.selectbox("Room type", ['Entire home/apt','Private room' , 'Shared room'], key='room_type')
+    minimum_nights = st.sidebar.slider("minimum nights", 1.000000 ,365.000000  , (365.000000 ))
+    reviews_per_month = st.sidebar.slider("reviews per month", 0.00 , 3.060000   , ( 3.060000  ))
+    calculated_host_listings_count = st.sidebar.slider("calculated host listings count", 1.000000, 274.000000   , (274.000000 ))
     st.info('Feel free to adjust the parameters(left of the screen) and see how it changes the visualisations(right of the screen).', icon="ℹ️")
     st.title("Explore Airbnb Rental Prices with this Voting Regressor Model")
     filtered_data = data[data['neighbourhood_group'] == ng_dict[neighbourhood_group]]
